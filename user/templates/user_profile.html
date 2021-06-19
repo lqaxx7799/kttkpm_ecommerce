@@ -1,0 +1,84 @@
+{% extends 'homebase.html' %}
+
+{% block title %}  {{ user.first_name }} Profile {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">User Profile</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-3">
+                    {% include "user_panel.html" %}
+                </div>
+
+                <div class="col-md-9">
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">Thông tin cá nhân</h3>
+                        </div>
+                    </div>
+                     <table class="shopping-cart-table table">
+                        <tr>
+                            <th class="text-left">
+                                <a href="/user/update" class="primary-btn">Cập nhật thông tin</a>
+                                <a href="/user/password" class="primary-btn">Đổi mật khẩu</a>
+                            </th>
+                            {% if profile.image.url != None %}
+                                <td><img src="{{ profile.image.url }}" style="border-radius: 45px; height: 200px "></td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th class="text-left">Họ và tên</th>
+                            <td class="text-left">{{ profile.hovaten}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Ngày sinh</th>
+                            <td class="text-left">{{ profile.ngaysinh}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Giới tính</th>
+                            <td class="text-left">{{ profile.gioitinh}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Địa chỉ</th>
+                            <td class="text-left">{{ profile.diachi}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Số DT</th>
+                            <td class="text-left">{{ profile.sodt}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Email</th>
+                            <td class="text-left">{{ profile.user.email}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+
+{% endblock %}

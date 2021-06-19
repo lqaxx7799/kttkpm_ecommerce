@@ -1,0 +1,75 @@
+{% extends 'homebase.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+{% block slider %} {% include 'slider.html' %} {% endblock %}
+
+{% block body %}
+   <!-- BREADCRUMB -->
+   <div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/browserInvoice">Browser Invoice</a></li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div  class="row">
+            <h2 class="text-center">DUYỆT ĐƠN</h2>
+            <form method="get">
+
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Lọc
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/browserInvoice">Tất cả</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/browserInvoice?status=WAITING">Đơn chưa xuất</a>
+                    </div>
+                </div>
+
+            </form>
+
+            <table class="table table-striped table-inverse table-responsive">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày</th>
+                        <th>Khách hàng</th>
+                        <th>Thanh toán</th>
+                        <th>Tình trạng</th>
+                        <th>Tổng</th>
+                        <th>Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in listOrder %}
+                        <tr>
+                            <td>{{ order.maDonHang }}</td>
+                            <td>{{ order.ngayDat }}</td>
+                            <td>{{ order.khachHang }}</td>
+                            <td>{{order.thanhToan}}</td>
+                            <td>{{order.tinhTrang}}</td>
+                            <td>{{order.tongTien}}</td>
+                            {% if order.tinhTrang == "Chưa xuất" %}
+                                <td><a class="button btn-success" href="/waitingInvoiceDetail/{{order.maDonHang}}">Xuất kho</a></td>                               
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+
+{% endblock %}
